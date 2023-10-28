@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Layout } from 'antd';
+import Sidebar from './components/Sidebar';
+import ContactFloatButton from './components/ContactFloatButton';
+import Home from './components/Home';
+import Contact from './components/Contact';
+const App = () => {
+  
+  const [selectedMenuItem, setSelectedMenuItem] = useState("home")
 
-function App() {
+  useEffect(() => {
+    console.log("selectedMenuItem -> ", selectedMenuItem)
+  }, [selectedMenuItem])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <ContactFloatButton />
+      <Sidebar
+        setSelected={setSelectedMenuItem}
+        selected={selectedMenuItem}
+      />
+      <Home selected={selectedMenuItem === "home" ? true:false}/>
+      <Contact selected={selectedMenuItem === "contact" ? true:false} />
+    </Layout>
   );
-}
-
+};
 export default App;
