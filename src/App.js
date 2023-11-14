@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Layout } from 'antd';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from './pages/Home';
+import Contact from './pages/Contact';
 import Sidebar from './components/Sidebar';
 import ContactFloatButton from './components/ContactFloatButton';
-import Home from './components/Home';
-import Contact from './components/Contact';
+import { Layout } from 'antd';
 const App = () => {
-  
-  const [selectedMenuItem, setSelectedMenuItem] = useState("home")
-
-  useEffect(() => {
-    console.log("selectedMenuItem -> ", selectedMenuItem)
-  }, [selectedMenuItem])
+  const [selectedSidebarItem, setSelectedSiderbarItem] = useState("home")
   return (
     <Layout>
-      <ContactFloatButton />
-      <Sidebar
-        setSelected={setSelectedMenuItem}
-        selected={selectedMenuItem}
-      />
-      <Home selected={selectedMenuItem === "home" ? true:false}/>
-      <Contact selected={selectedMenuItem === "contact" ? true:false} />
+      <BrowserRouter>
+        <Sidebar selectedSidebarItem={selectedSidebarItem} />
+        <ContactFloatButton />
+        <Routes>
+          <Route path="/" element={<Home setSelectedSiderbarItem={setSelectedSiderbarItem} />} />
+          <Route path="/contact" element={<Contact setSelectedSiderbarItem={setSelectedSiderbarItem} />} />
+        </Routes>
+      </BrowserRouter>
     </Layout>
   );
 };

@@ -1,21 +1,21 @@
 import React from 'react';
 import { Layout } from 'antd';
 const { Content } = Layout;
-const Home = ({selected}) => {
+const Home = ({ setSelectedSiderbarItem }) => {
+  setSelectedSiderbarItem("home")
   return (
-    selected ?
     <Layout>
       <Content
-          style={{
+        style={{
           margin: '24px 16px',
           padding: 24,
           minHeight: 280,
           background: "#fff",
-          }}
+        }}
       >
-          Content
+        Content
       </Content>
-    </Layout>:null
+    </Layout>
   );
 };
 export default Home;
